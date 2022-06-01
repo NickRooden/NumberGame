@@ -1,9 +1,11 @@
 package com.NickRooden.numbergame.domain
 
-data class Results(
+import java.io.Serializable
+
+data class ResultsGm(
 
     val winner: Boolean,
     val rightAnswers: Int,
     val allAnswers: Int,
     val settings: Settings
-)
+): Serializable

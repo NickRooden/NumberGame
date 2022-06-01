@@ -34,7 +34,7 @@ object RepositoryImpl : Repository{
     override fun getSettings(level: Level): Settings {
         return when (level){
             Level.TEST -> Settings(10, 3, 50, 8)
-            Level.EYSY -> Settings(10, 3, 50, 8)
+            Level.EASY -> Settings(10, 3, 50, 8)
             Level.NORMAL -> Settings(10, 3, 50, 8)
             Level.HARD -> Settings(10, 3, 50, 8)
         }
