@@ -20,7 +20,7 @@ class GameResultFrag : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        result = requireArguments().getSerializable(GAME_RESULT) as ResultsGm
+        parseArgs()
     }
 
     override fun onCreateView(
@@ -49,6 +49,12 @@ class GameResultFrag : Fragment() {
         )
     }
 
+    fun parseArgs(){
+        requireArguments().getParcelable<ResultsGm>(GAME_RESULT)?.let {
+            result = it
+        }
+    }
+
     fun retryGame(){
         requireActivity().supportFragmentManager
             .popBackStack(Game.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE)
@@ -62,7 +68,7 @@ class GameResultFrag : Fragment() {
 
             return GameResultFrag().apply {
                 arguments = Bundle().apply {
-                    putSerializable(GAME_RESULT, result)
+                    putParcelable(GAME_RESULT, result)
                 }
             }
         }

@@ -1,11 +1,13 @@
 package com.NickRooden.numbergame.domain
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Settings(
 
     val maxSum: Int,
     val answersToWin: Int,
     val percentToWin: Int,
     val timeOfGame: Int
-): Serializable
+): Parcelable

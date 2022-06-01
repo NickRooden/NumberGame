@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.NickRooden.numbergame.R
 import com.NickRooden.numbergame.databinding.GameBinding
 import com.NickRooden.numbergame.domain.Level
@@ -12,6 +13,14 @@ import com.NickRooden.numbergame.domain.ResultsGm
 import com.NickRooden.numbergame.domain.Settings
 
 class Game : Fragment() {
+
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory
+                .getInstance(requireActivity().application)
+        )[GameViewModel::class.java]
+    }
 
     private lateinit var level : Level
 
@@ -48,6 +57,15 @@ class Game : Fragment() {
                 )
             )
         }
+
+
+
+        viewModel.startGame(level)
+        binding.timer.text = "ghjt"
+        viewModel.timerStr.observe(viewLifecycleOwner){
+            binding.timer.text = it.toString()
+        }
+
     }
 
     override fun onDestroy() {
@@ -65,7 +83,9 @@ class Game : Fragment() {
     }
 
     fun parseArgs(){
-        level = requireArguments().getSerializable(LEVEL) as Level
+        requireArguments().getParcelable<Level>(LEVEL)?.let {
+            level = it
+        }
     }
 
     companion object{
@@ -76,7 +96,7 @@ class Game : Fragment() {
         fun newInst(level: Level): Game{
             return Game().apply {
                 arguments = Bundle().apply {
-                    putSerializable(LEVEL, level)
+                    putParcelable(LEVEL, level)
                 }
             }
         }
