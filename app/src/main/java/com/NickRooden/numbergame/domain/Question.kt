@@ -7,5 +7,7 @@ data class Question(
     val nmbrToChoice: List<Int>
 
 
-)
+){
+    val rightAnswer get() = sum - numberToSee
+}
 

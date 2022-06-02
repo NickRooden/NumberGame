@@ -28,36 +28,36 @@
         tools:text="winner/looser" />
 
     <TextView
-        android:id="@+id/right_answers"
+        android:id="@+id/answers_to_win"
         style="@style/resultTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/winner"
-        tools:text="34 - right answers" />
+        tools:text="answers_to_win" />
+
+    <TextView
+        android:id="@+id/right_answers"
+        style="@style/resultTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answers_to_win"
+        tools:text="right answers" />
+
+    <TextView
+        android:id="@+id/persent_to_win"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/right_answers"
+        tools:text="persent_to_win"
+        style="@style/resultTextView" />
 
     <TextView
         android:id="@+id/right_percent"
         style="@style/resultTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/right_answers"
-        tools:text="89% - right answers" />
-
-    <TextView
-        android:id="@+id/all_answers"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/right_percent"
-        tools:text="56 - all answers"
-        style="@style/resultTextView" />
-
-    <TextView
-        android:id="@+id/time_game"
-        style="@style/resultTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/all_answers"
-        tools:text="78 seconds of game" />
+        app:layout_constraintTop_toBottomOf="@+id/persent_to_win"
+        tools:text="right_percent" />
 
     <Button
         android:id="@+id/button_again"

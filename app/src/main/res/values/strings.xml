@@ -12,4 +12,11 @@
     <string name="hard">Hard</string>
     <string name="question_mark">\?</string>
     <string name="try_again">try again</string>
+    <string name="progress_answers">Right Answers %s (min Answers %s)</string>
+    <string name="winner">WINNER!!!!</string>
+    <string name="loser">Game lost:(</string>
+    <string name="answers_to_win">You need %s answers</string>
+    <string name="right_answers">%s right answers</string>
+    <string name="percent_to_win">%s percent to win</string>
+    <string name="right_percent">%s per right answers</string>
 </resources>
