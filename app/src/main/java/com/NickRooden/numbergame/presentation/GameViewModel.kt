@@ -5,19 +5,20 @@ import android.os.CountDownTimer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.NickRooden.numbergame.R
 import com.NickRooden.numbergame.data.RepositoryImpl
 import com.NickRooden.numbergame.domain.*
 
-class GameViewModel(application: Application) : AndroidViewModel(application) {
+class GameViewModel(
+    private val application: Application,
+    private val level: Level
+) : ViewModel() {
 
     val repository = RepositoryImpl
     val getQuestionUseCase = GetQuestionUseCase(repository)
     val getSettingsUseCase = GetSettingsUseCase(repository)
 
-    //val context = application
-
-    private lateinit var  level : Level
     private lateinit var  settings : Settings
 
     private var timer: CountDownTimer? = null
@@ -50,9 +51,13 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var countOfRightAnswers = 0
     private var countOfQuestions = 0
 
+    init {
+        startGame()
+    }
 
-    fun startGame(level: Level){
-        setSettings(level)
+
+    private fun startGame(){
+        setSettings()
         startTimer()
         getQuestion()
         updateProgress()
@@ -68,7 +73,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         val percent = calculatePercentOfRightAnswers()
         _percentOfRightAnswer.value = percent
         _progressAnswers.value = String.format(
-            context.resources.getString(R.string.progress_answers),
+            application.resources.getString(R.string.progress_answers),
             countOfRightAnswers,
             settings.answersToWin
         )
@@ -91,8 +96,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         countOfQuestions++
     }
 
-    private fun setSettings(level: Level){
-        this.level = level
+    private fun setSettings(){
         this.settings = getSettingsUseCase(level)
         _minPercentOfRightAnswer.value = settings.percentToWin
     }

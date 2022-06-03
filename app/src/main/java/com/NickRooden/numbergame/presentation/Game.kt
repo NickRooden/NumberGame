@@ -17,12 +17,12 @@ import com.NickRooden.numbergame.domain.Settings
 
 class Game : Fragment() {
 
+    private val viewModelFactory by lazy {
+        GameViewModelFactory(requireActivity().application, level)
+    }
+
     private val viewModel by lazy {
-        ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory
-                .getInstance(requireActivity().application)
-        )[GameViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
     private val optins by lazy {
         mutableListOf<TextView>().apply {
@@ -59,10 +59,6 @@ class Game : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         setClickListenerOnOptions()
-        viewModel.startGame(level)
-
-
-
     }
 
     private fun setClickListenerOnOptions(){
