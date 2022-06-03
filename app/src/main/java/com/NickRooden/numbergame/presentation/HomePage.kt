@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.NickRooden.numbergame.R
 import com.NickRooden.numbergame.databinding.HomePageBinding
 
@@ -34,10 +35,7 @@ class HomePage: Fragment() {
     }
 
     fun launchGameLevelFragment(){
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameLevel.newInst())
-            .addToBackStack(GameLevel.NAME)
-            .commit()
+        findNavController().navigate(R.id.action_homePage_to_gameLevel)
     }
 
     override fun onDestroy() {

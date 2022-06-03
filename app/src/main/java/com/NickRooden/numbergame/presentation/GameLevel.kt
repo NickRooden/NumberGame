@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.NickRooden.numbergame.R
 import com.NickRooden.numbergame.databinding.GameLevelBinding
 import com.NickRooden.numbergame.domain.Level
@@ -49,10 +50,7 @@ class GameLevel : Fragment() {
 
 
     fun launchGameFragment(level: Level){
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, Game.newInst(level))
-            .addToBackStack(Game.NAME)
-            .commit()
+        findNavController().navigate(GameLevelDirections.actionGameLevelToGame(level))
 
     }
 
@@ -60,9 +58,6 @@ class GameLevel : Fragment() {
 
         const val NAME = "game level"
 
-        fun newInst() : GameLevel{
-            return GameLevel()
-        }
     }
 
 }

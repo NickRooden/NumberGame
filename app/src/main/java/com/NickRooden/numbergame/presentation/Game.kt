@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.NickRooden.numbergame.R
 import com.NickRooden.numbergame.databinding.GameBinding
 import com.NickRooden.numbergame.domain.Level
@@ -17,8 +19,10 @@ import com.NickRooden.numbergame.domain.Settings
 
 class Game : Fragment() {
 
+    private val args by navArgs<GameArgs>()
+
     private val viewModelFactory by lazy {
-        GameViewModelFactory(requireActivity().application, level)
+        GameViewModelFactory(requireActivity().application, args.level)
     }
 
     private val viewModel by lazy {
@@ -41,10 +45,6 @@ class Game : Fragment() {
     private val binding : GameBinding
         get() = _binding ?: throw RuntimeException("GameBinding==null")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -119,30 +119,8 @@ class Game : Fragment() {
 
     fun launchResultFragment(result: ResultsGm){
 
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.main_container, GameResultFrag.newInst(result))
-            .addToBackStack(null)
-            .commit()
+        findNavController().navigate(GameDirections.actionGameToGameResultFrag(result))
 
     }
 
-    fun parseArgs(){
-        requireArguments().getParcelable<Level>(LEVEL)?.let {
-            level = it
-        }
-    }
-
-    companion object{
-
-        const val LEVEL = "level"
-        const val NAME = "game"
-
-        fun newInst(level: Level): Game{
-            return Game().apply {
-                arguments = Bundle().apply {
-                    putParcelable(LEVEL, level)
-                }
-            }
-        }
-    }
 }

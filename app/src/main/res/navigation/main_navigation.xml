@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homePage">
+
+    <fragment
+        android:id="@+id/homePage"
+        android:name="com.NickRooden.numbergame.presentation.HomePage"
+        android:label="HomePage" >
+        <action
+            android:id="@+id/action_homePage_to_gameLevel"
+            app:destination="@id/gameLevel" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameLevel"
+        android:name="com.NickRooden.numbergame.presentation.GameLevel"
+        android:label="GameLevel" >
+        <action
+            android:id="@+id/action_gameLevel_to_game"
+            app:destination="@id/game" />
+    </fragment>
+    <fragment
+        android:id="@+id/game"
+        android:name="com.NickRooden.numbergame.presentation.Game"
+        android:label="Game" >
+        <action
+            android:id="@+id/action_game_to_gameResultFrag"
+            app:destination="@id/gameResultFrag"
+            app:popUpTo="@id/game"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="level"
+            app:argType="com.NickRooden.numbergame.domain.Level" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameResultFrag"
+        android:name="com.NickRooden.numbergame.presentation.GameResultFrag"
+        android:label="GameResultFrag" >
+        <argument
+            android:name="result"
+            app:argType="com.NickRooden.numbergame.domain.ResultsGm" />
+    </fragment>
+</navigation>
