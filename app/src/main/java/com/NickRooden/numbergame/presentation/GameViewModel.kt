@@ -15,7 +15,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     val getQuestionUseCase = GetQuestionUseCase(repository)
     val getSettingsUseCase = GetSettingsUseCase(repository)
 
-    val context = application
+    //val context = application
 
     private lateinit var  level : Level
     private lateinit var  settings : Settings
